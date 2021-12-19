@@ -1,0 +1,77 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" template="template.xhtml">
+
+
+
+	<h:form id="form">
+
+		<div class="card">
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Adicionar" action="#{carroBean.adicionar}"
+						update="@form" icon="pi pi-file" styleClass="p-mr-2" />
+						
+						<p:commandButton value="Listar" action="#{carroBean.listar}"
+						update="@form" icon="pi pi-file" styleClass="p-mr-2" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</div>
+		<p:messages autoUpdate="true" showDetail="true"> </p:messages>
+
+		<p:fieldset toggleable="true" toggleSpeed="500">
+
+			<p:panelGrid columns="2">
+
+				<p:outputLabel value="Modelo" />
+				<p:inputText value="#{carroBean.carro.modelo}"  />
+
+				<p:outputLabel value="Fabricante" />
+				<p:inputText value="#{carroBean.carro.fabricante}" />
+
+				<p:outputLabel value="Cor" />
+				<p:inputText value="#{carroBean.carro.cor}" />
+
+				<p:outputLabel value="Ano" />
+				<p:calendar mask="99/99/9999" value="#{carroBean.carro.ano}">
+					
+				</p:calendar>
+
+
+			</p:panelGrid>
+
+		</p:fieldset>
+
+		<p:dataTable value="#{carroBean.carros}" var="c" id="c"
+			showGridlines="true">
+			<p:column headerText="Editar">
+				<p:commandButton value="Editar" action="#{carroBean.editar(c)}" update="@form"/>  
+				<p:commandButton value="Excluir" action="#{carroBean.excluir(c)}" update="@form"/> 
+			</p:column>
+			<p:column headerText="Modelo">
+				<h:outputText value="#{c.modelo}" />
+			</p:column>
+			<p:column headerText="Fabricante">
+				<h:outputText value="#{c.fabricante}" />
+			</p:column>
+			<p:column headerText="Cor">
+				<h:outputText value="#{c.cor}" />
+			</p:column>
+			<p:column headerText="Ano">
+				<h:outputText value="#{c.ano}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+
+
+		</p:dataTable>
+
+
+	</h:form>
+
+
+
+
+</ui:decorate>
